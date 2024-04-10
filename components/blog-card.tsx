@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
+import Image from 'next/image';
+import avatar from '../app/assets/images/image-avatar.webp';
 
 type BlogCardProps = {
   children?: React.ReactNode;
@@ -19,10 +19,9 @@ function Illustration() {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='336'
-      height='201'
       fill='none'
       viewBox='0 0 336 201'
+      className='w-64 sm:w-80'
     >
       <g clip-path='url(#a)'>
         <path fill='#F4D04E' d='M0 .5h336v200H0z' />
@@ -129,15 +128,35 @@ export default function BlogCard({ className, children }: BlogCardProps) {
     };
   }, []);
   return (
-    <Card className='border-black dark:border-none shadow-[4px_4px_0_hsl(0_0%_0%)] dark:shadow-[4px_4px_0_hsl(0_0%_100%)]'>
+    <Card
+      className={cn(
+        'border-black dark:border-none shadow-[7px_7px_0_hsl(0_0%_0%)] dark:shadow-[7px_7px_0_hsl(0_0%_100%)] sm:max-w-[23rem] max-w-[19rem]',
+        className
+      )}
+    >
       <CardHeader>
         <Illustration />
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <section className='flex flex-col gap-2'>
+          <span className='rounded bg-background py-1 px-3 w-min text-xs font-extrabold block'>
+            Learning
+          </span>
+          <p className='text-sm font-medium'>Published 21 Dec 2023</p>
+          <h1 className='text-primary text-xl font-extrabold dark:text-foreground hover:text-background cursor-pointer'>
+            HTML & CSS foundations
+          </h1>
+          <p className='text-muted-foreground leading-5 text-sm'>
+            These languages are the backbone of every website, defining
+            structure, content, and presentation.
+          </p>
+        </section>
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <div className='flex items-center gap-3'>
+          <Image height={30} width={30} alt='author picture' src={avatar} />
+          <p className='font-extrabold'>Greg Hooper</p>
+        </div>
       </CardFooter>
     </Card>
   );
